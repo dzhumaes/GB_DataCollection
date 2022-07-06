@@ -31,7 +31,6 @@ for i in range(0, 9):
    dom = bs(response.text, 'html.parser')
    vacancies = dom.find_all('span',{'class':'g-user-content'})
 
-   # vacancies = dom.find_all('a', {'data-qa': 'vacancy-serp__vacancy-title'})
    for vacancy in vacancies:
       vacancy_data = {}
       main_info = vacancy.findChild()
