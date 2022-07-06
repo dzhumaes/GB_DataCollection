@@ -21,10 +21,11 @@ response = session.get(url+'/search/vacancy?area=1&industry=7.539&search_field=n
 
 dom = bs(response.text, 'html.parser')
 vacancies = dom.find_all('a', {'data-qa': 'vacancy-serp__vacancy-title'})
-last_page = dom.find('a', {'data-qa': 'pager-next'}).previous_sibling.text
+last_page_text = dom.find('a', {'data-qa': 'pager-next'}).previous_sibling.text
+last_page = last_page_text[3:]
 vacancies_list = []
 
-for i in range(0, 9):
+for i in range(0, int(last_page)):
    print(f'Please wait. In progress... scrapping page {i}')
    params['page'] = i
    response = session.get(url + '/search/vacancy?area=1&industry=7.539&search_field=name&search_field=company_name&search_field=description&text=бизнес-аналитик', headers=headers, params=params)
