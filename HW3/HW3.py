@@ -13,7 +13,7 @@ _SEARCH_STR = 'бизнес-аналитик'
 _SALARY_MIN = 100000
 _SALARY_CURRENCY = 'руб.'
 
-def show_vacancies (salary_min, collection):
+def show_vacancies(salary_min, collection):
     result = collection.find({
         'salary_currency': {'$eq': _SALARY_CURRENCY},
         '$or': [{'salary_min': {'$gte': salary_min}}, {'salary_max': {'$gt': salary_min}}]
