@@ -24,11 +24,13 @@ def main():
     db = client['news']
     mail_news = db.mail_news
 
-    news_result = MRScrap().mailParse_news()
+    news_result = MRScrap().mailParse()
 
     mail_news.insert_many(news_result)
     show_news('news')
 
 if __name__ == '__main__':
     sys.exit(main())
+
+print()
 
