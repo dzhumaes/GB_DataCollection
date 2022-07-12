@@ -12,25 +12,27 @@
 import sys
 from pymongo import MongoClient
 from pprint import pprint
-from scrapper_news_mail import MailRuScrapper as MRScrap
+from scrapper_news_mail import MailRuScrapper
+from scrapper_news_ya import YandexRuScrapper
 
 def show_news(collection):
     result = collection.find({})
     for item in result:
         pprint(item)
 
+def save_records(new_resault, collection):
+    collection.insert_many(new_resault)
+
 def main():
     client = MongoClient('127.0.0.1', 27017)
     db = client['news']
     mail_news = db.mail_news
 
-    news_result = MRScrap().mailParse()
+    new_result = MailRuScrapper().mailParse_news()
+    new_result += YandexRuScrapper().YaParse_news()
 
-    mail_news.insert_many(news_result)
-    show_news('news')
+    save_records(new_result, mail_news)
+    show_news(mail_news)
 
 if __name__ == '__main__':
     sys.exit(main())
-
-print()
-
