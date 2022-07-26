@@ -1,3 +1,5 @@
+# Домашнее задание №6
+
 import scrapy
 from scrapy.http import HtmlResponse
 from jobparser.items import JobparserItem
